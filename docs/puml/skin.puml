@@ -1,0 +1,19 @@
+@startuml "skin-definition"
+skinparam {
+  Handwritten true
+  Shadowing false
+
+  BackgroundColor #282a36
+  DefaultFontColor #f8f8f2
+  ArrowFontColor #6272a4
+  ArrowColor #f8f8f2
+
+  DatabaseBackgroundColor #282a36
+  NodeBackgroundColor #282a36
+  QueueBackgroundColor #282a36
+
+  DatabaseBorderColor #f8f8f2
+  NodeBorderColor #f8f8f2
+  QueueBorderColor #f8f8f2
+}
+@enduml

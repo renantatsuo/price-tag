@@ -1,0 +1,13 @@
+@startuml "Application-Overview"
+!include skin.puml
+
+node Scheduler
+node Scraper
+database Database
+queue Queue
+
+Scheduler --> Queue: Schedule the searches
+Queue -- Scraper: Listen the queue\nand run scrapers
+Scraper --> Database: Save the products in Database
+
+@enduml
