@@ -1,0 +1,17 @@
+{
+  "name": "tagger",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
