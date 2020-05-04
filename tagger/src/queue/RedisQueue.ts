@@ -1,6 +1,12 @@
 import RedisSMQ, { ConstructorOptions, QueueMessage } from "rsmq";
+import { ListenCallback } from "./ListenCallback";
 import { Message } from "./Message";
 import { Queue } from "./Queue";
+
+/**
+ * 1 second in miliseconds
+ */
+const ONE_SECOND = 1000;
 
 /**
  * Redis implementation for the queue.
@@ -9,12 +15,12 @@ export class RedisQueue implements Queue {
   /**
    * The queue name.
    */
-  queue: string;
+  private queue: string;
 
   /**
    * The redis client.
    */
-  redis: RedisSMQ;
+  private redis: RedisSMQ;
 
   /**
    * Constructor.
@@ -49,9 +55,20 @@ export class RedisQueue implements Queue {
   }
 
   /**
+   * Listen to the current queue.
+   *
+   * @param callback the message handler function
+   */
+  async listen(callback: ListenCallback) {
+    setInterval(async () => {
+      callback(await this.getMessage());
+    }, ONE_SECOND);
+  }
+
+  /**
    * Get the last message from the queue.
    */
-  async getMessage(): Promise<Message> {
+  private async getMessage(): Promise<Message> {
     const { message } = (await this.redis.popMessageAsync({
       qname: this.queue,
     })) as QueueMessage;

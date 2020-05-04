@@ -1,3 +1,4 @@
+import { ListenCallback } from "./ListenCallback";
 import { Message } from "./Message";
 
 /**
@@ -11,4 +12,11 @@ export interface Queue {
    * @param queue the queue to send the message
    */
   sendMessage(message: Message, queue?: string): void;
+
+  /**
+   * Listen to the messages from the queue.
+   *
+   * @param callback the messages handler function
+   */
+  listen(callback: ListenCallback): void;
 }
