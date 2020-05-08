@@ -1,22 +1,22 @@
 import { Message } from "./Message";
-import { SearchOptions } from "./SearchOptions";
+import { Search } from "./Search";
 
 /**
  * The SearchMessage definition.
  */
 export class SearchMessage implements Message {
   /**
-   * The message Date.
+   * The message date string.
    */
-  date: Date;
+  date: string;
 
   /**
    * The message payload.
    */
-  payload: SearchOptions;
+  payload: Search;
 
-  constructor(searchOptions: SearchOptions) {
-    this.date = new Date();
+  constructor(searchOptions: Search) {
+    this.date = new Date().toUTCString();
     this.payload = searchOptions;
   }
 }

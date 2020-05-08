@@ -3,9 +3,9 @@
  */
 export interface Message {
   /**
-   * The message date.
+   * The message date string.
    */
-  date: Date;
+  date: string;
 
   /**
    * The message payload.
