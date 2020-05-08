@@ -1,7 +1,7 @@
 /**
  * Search options payload specification.
  */
-export interface SearchOptions {
+export interface Search {
   /**
    * The search text.
    */

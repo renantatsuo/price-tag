@@ -2,7 +2,7 @@ import { ListenCallback } from "./ListenCallback";
 import { Message } from "./Message";
 
 /**
- * Interface to handle queues operations
+ * Interface to handle queues operations.
  */
 export interface Queue {
   /**
