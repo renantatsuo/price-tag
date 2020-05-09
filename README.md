@@ -4,6 +4,10 @@ Price tag is a service to track stuck I want to buy in MercadoLivre.
 
 ## Modules
 
+### Overview
+
+![Application Overview](/docs/Application-Overview.png)
+
 ### Scheduler
 
 Schedules the scrapers publishing a message into the queue.

@@ -3,17 +3,17 @@ skinparam {
   Handwritten true
   Shadowing false
 
-  BackgroundColor #282a36
-  DefaultFontColor #f8f8f2
+  BackgroundColor #ffffff
+  DefaultFontColor #282a36
   ArrowFontColor #6272a4
-  ArrowColor #f8f8f2
+  ArrowColor #282a36
 
-  DatabaseBackgroundColor #282a36
-  NodeBackgroundColor #282a36
-  QueueBackgroundColor #282a36
+  DatabaseBackgroundColor #ffffff
+  ComponentBackgroundColor #ffffff
+  QueueBackgroundColor #ffffff
 
-  DatabaseBorderColor #f8f8f2
-  NodeBorderColor #f8f8f2
-  QueueBorderColor #f8f8f2
+  DatabaseBorderColor #282a36
+  ComponentBorderColor #282a36
+  QueueBorderColor #282a36
 }
 @enduml
