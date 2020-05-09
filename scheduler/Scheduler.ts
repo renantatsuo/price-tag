@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 import { scheduleJob } from "node-schedule";
 import { Database, Queue, Search, SearchMessage } from "tagger";
 import { SCHEDULER_RULE } from "./config";
