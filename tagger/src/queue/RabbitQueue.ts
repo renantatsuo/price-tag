@@ -64,7 +64,7 @@ export class RabbitQueue implements Queue {
     const channel = await this.getChannel();
 
     try {
-      channel.publish(this.queue, "", new Buffer(JSON.stringify(message)));
+      channel.publish(this.queue, "", Buffer.from(JSON.stringify(message)));
     } catch (e) {
       console.error(e);
       await channel.close();
