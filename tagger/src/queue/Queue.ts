@@ -11,12 +11,12 @@ export interface Queue {
    * @param message the message to be published
    * @param queue the queue to send the message
    */
-  sendMessage(message: Message, queue?: string): void;
+  sendMessage(message: Message, queue?: string): Promise<Message>;
 
   /**
    * Listen to the messages from the queue.
    *
    * @param callback the messages handler function
    */
-  listen(callback: ListenCallback): void;
+  listen(callback: ListenCallback): Promise<1>;
 }

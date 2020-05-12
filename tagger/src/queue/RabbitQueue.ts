@@ -1,7 +1,10 @@
 import amqplib, { Channel } from "amqplib";
+import { Logger } from "./../log";
 import { ListenCallback } from "./ListenCallback";
 import { Message } from "./Message";
 import { Queue } from "./Queue";
+
+const logger = new Logger("RabbitQueue");
 
 /**
  * RabbitMQ Queue implementation.
@@ -45,10 +48,10 @@ export class RabbitQueue implements Queue {
       this.channel.assertQueue(this.queue, { durable: true });
       this.channel.bindQueue(this.queue, this.queue, "");
 
-      console.info("[AMQP] Connected.");
+      logger.info("[AMQP] Connected.");
 
-      connection.on("error", console.error);
-      connection.on("close", () => console.info("[AMQP] Connection closed."));
+      connection.on("error", logger.error);
+      connection.on("close", () => logger.info("[AMQP] Connection closed."));
     }
 
     return this.channel;
@@ -60,14 +63,19 @@ export class RabbitQueue implements Queue {
    * @param message the message to be sent
    * @param queue the queue to send the message, default is the same queue
    */
-  async sendMessage(message: Message, queue: string = this.queue) {
+  async sendMessage(
+    message: Message,
+    queue: string = this.queue
+  ): Promise<Message> {
     const channel = await this.getChannel();
 
     try {
       channel.publish(this.queue, "", Buffer.from(JSON.stringify(message)));
+      return message;
     } catch (e) {
-      console.error(e);
+      logger.error(e);
       await channel.close();
+      return Promise.reject(e);
     }
   }
 
@@ -76,12 +84,19 @@ export class RabbitQueue implements Queue {
    *
    * @param callback the message handler function
    */
-  async listen(callback: ListenCallback) {
+  async listen(callback: ListenCallback): Promise<1> {
     const channel = await this.getChannel();
 
-    channel.consume(
-      this.queue,
-      (message) => message && callback(JSON.parse(message.content.toString()))
-    );
+    try {
+      await channel.consume(
+        this.queue,
+        (message) => message && callback(JSON.parse(message.content.toString()))
+      );
+      return 1;
+    } catch (e) {
+      logger.error(e);
+      await channel.close();
+      return Promise.reject(e);
+    }
   }
 }
