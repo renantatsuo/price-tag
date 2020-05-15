@@ -1,4 +1,4 @@
-import { Search } from "../queue";
+import { Item, Search } from "../defs";
 
 /**
  * The database specification to handle database operations.
@@ -10,18 +10,10 @@ export interface Database {
   getSearches(): Promise<Search[]>;
 
   /**
-   * Save an object to the database.
+   * Save an array of Items to the database.
    *
-   * @param objectToSave the object to be saved.
+   * @param itemsToSave the array of Items to be saved.
    * @param table the table to save the object.
    */
-  saveObject<T extends Object>(objectToSave: T, table: string): Promise<T>;
-
-  /**
-   * Save an array of objects to the database.
-   *
-   * @param objectsToSave the array of objects to be saved.
-   * @param table the table to save the object.
-   */
-  saveAll<T extends Object>(objectsToSave: T[], table: string): Promise<T[]>;
+  saveItems(itemsToSave: Item[]): Promise<Item[]>;
 }
