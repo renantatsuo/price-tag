@@ -1,5 +1,5 @@
+import { Search } from "../defs";
 import { Message } from "./Message";
-import { Search } from "./Search";
 
 /**
  * The SearchMessage definition.
